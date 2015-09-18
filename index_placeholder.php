@@ -1,7 +1,6 @@
 <?php 
 require('logic.php'); 
 $process = new GenProc1();
-$process->rendword($_POST['words']); 
 
 ?>
 <!DOCTYPE html>
@@ -24,8 +23,11 @@ $process->rendword($_POST['words']);
     	<p>xkcd Password Generator</p>
         <form method='POST' action='index_placeholder.php'>
             <label>Number of Words</label><input type='text' name='words'><br>
+            <label>Add a number</label><input type="checkbox" name="checkbox" value="check"><br> 
+            <label>Add a symbol</label><input  type="checkbox" name='symbols'><br>
             <input type='submit' value='generate'>
-        </form>     
+        </form>
+        <?php $process->rendword(); ?>     
 	</div>
     <script src="js/bootstrap.min.js"></script>
 </body>
