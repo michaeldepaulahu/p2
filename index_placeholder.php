@@ -23,9 +23,12 @@ $process = new GenProc1();
     <div class="container-fluid"> 
     	<p>xkcd Password Generator</p>
         <form method='POST' action='index_placeholder.php'>
-            <label>Number of Words</label><input type='text' name='words'><br>
-            <label>Add a number</label><input type="checkbox" name="checkbox"><br> 
-            <label>Add a symbol</label><input  type="checkbox" name='symbols'><br>
+            <label>Number of Words</label> <input type='text' name='words'><br>
+            <label>Separator</label> <input type='text' name='delimiter'><br>
+            <label>Add a number</label> <input type="checkbox" name="checkbox"><br> 
+            <label>Add a symbol</label> <input  type="checkbox" name='symbols'><br>
+            <label>First letter uppercase</label> <input  type="checkbox" name='firstcase'><br>
+            <label>All uppercase</label> <input  type="checkbox" name='uppercase'><br>
             <input type='submit' value='generate'>
         </form>     
 	</div>

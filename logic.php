@@ -2,7 +2,8 @@
 	
 class GenProc1{
 	public $words = array();
-	public $track = array(''); 
+	public $track = array(); 
+	public $password; 
 		
 	public function __construct()
 	{
@@ -10,10 +11,9 @@ class GenProc1{
 		$this->glossary(); 
 		
 		// renders words
-		$this->show(
 		$this->rendword(
 		$this->checkfield('words')
-		)); 
+		); 
 		
 		// renders numbers
 		$this->show(
@@ -32,7 +32,7 @@ class GenProc1{
 	public function glossary()
 	{
 		// 3 second check to pull froms paulnoll large library
-		$fp = @fsockopen("www.paulnoll.com", 80, $errno, $errstr,3);
+		$fp = @fsockopen("www.paulnoll.com@", 80, $errno, $errstr,3);
 		if (is_resource($fp))
 		{
 			$file = file_get_contents($this->rand_pages());
@@ -113,7 +113,7 @@ class GenProc1{
 		$numbers = $param == "on" ? rand(0,9) : ""; 	
 		return $numbers; 
 	}
-	
+
 	//return character
 	public function char($param)
 	{	
@@ -123,6 +123,23 @@ class GenProc1{
 			$chr = preg_match("/^[\'\"@a-zA-Z0-9]*$/",$char) ? $this->char($param) : $char;
 			return $chr;
 		}
+	}
+	
+	// format/generate words
+	public function generate($param, $delimiter)
+	{
+		if($this->checkbox('uppercase') == "on")
+		{ 
+			echo strtoupper($param.$delimiter);
+		}
+		else if ($this->checkbox('firstcase') == "on")
+		{ 
+			echo ucfirst($param.$delimiter);
+		}
+		else
+		{ 
+			echo $param.$delimiter;
+		}	
 	}		
 	
 	// returns words dictionary count
@@ -147,9 +164,12 @@ class GenProc1{
 			else
 			{
 				array_push($this->track,$rand);
-				echo $this->words[$rand];
+				$j == $this->word-1 ? $delimiter = "" : $delimiter = $this->checkfield('delimiter');
+				 
+				echo $this->generate( $this->words[$rand], $delimiter);
 			}				
 		}
+
 	}
 }
 ?>
