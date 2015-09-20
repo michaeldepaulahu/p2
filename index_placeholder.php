@@ -1,6 +1,11 @@
 <?php 
+
+
+	
+	
 require('logic.php'); 
 $process = new GenProc1();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

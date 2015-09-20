@@ -1,11 +1,14 @@
 <?php
 	
 class GenProc1{
-	public $words = Array('cloud','borrow','tip','pop','jason','water','dog','river');
+	public $words = array();
 	public $track = array(''); 
-	
+		
 	public function __construct()
 	{
+		// build dictionary
+		$this->glossary(); 
+		
 		// renders words
 		$this->show(
 		$this->rendword(
@@ -25,6 +28,41 @@ class GenProc1{
 		));
 	}
 	
+	// loads dictionary 
+	public function glossary()
+	{
+		// get contents and source code
+		$file = file_get_contents($this->rand_pages());
+		$htmlfile = htmlentities($file);
+		
+		// build match
+		$pattern = htmlspecialchars("<li>[A-Za-z\s]*<\/li>", ENT_QUOTES);
+		preg_match_all("/$pattern/", $htmlfile, $read);
+		
+		// remove tags
+		$pattern_r = htmlspecialchars("<li>\s+|\s+<\/li>", ENT_QUOTES);
+		foreach ($read[0] as $value)
+		{
+			array_push($this->words,preg_replace("/$pattern_r/", '', $value,-1)); 
+		}			
+	}
+
+	// random-select page
+	function rand_pages()
+	{
+		$rando = rand(1,30); 
+		if($rando % 2 == 0)
+		{
+			$rand_pages = sprintf("http://www.paulnoll.com/Books/Clear-English/words-%02d-%02d-hundred.html", $rando-1, $rando);	
+			return $rand_pages;
+		} 
+		else 
+		{
+			$rand_pages = sprintf("http://www.paulnoll.com/Books/Clear-English/words-%02d-%02d-hundred.html", $rando, $rando+1);	
+			return $rand_pages;
+		}
+	}
+			
 	// print post values
 	function show($post)
 	{
