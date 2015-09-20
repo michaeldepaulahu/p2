@@ -50,15 +50,17 @@ class GenProc1{
 	// random-select page
 	function rand_pages()
 	{
-		$rando = rand(1,30); 
+		$rando = rand(1,30);
+		$url = "http://www.paulnoll.com/Books/Clear-English/words-%02d-%02d-hundred.html";
+		
 		if($rando % 2 == 0)
 		{
-			$rand_pages = sprintf("http://www.paulnoll.com/Books/Clear-English/words-%02d-%02d-hundred.html", $rando-1, $rando);	
+			$rand_pages = sprintf($url, $rando-1, $rando);	
 			return $rand_pages;
 		} 
 		else 
 		{
-			$rand_pages = sprintf("http://www.paulnoll.com/Books/Clear-English/words-%02d-%02d-hundred.html", $rando, $rando+1);	
+			$rand_pages = sprintf($url, $rando, $rando+1);	
 			return $rand_pages;
 		}
 	}
