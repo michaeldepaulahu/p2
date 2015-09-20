@@ -1,7 +1,4 @@
 <?php 
-
-
-	
 	
 require('logic.php'); 
 $process = new GenProc1();

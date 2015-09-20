@@ -31,8 +31,18 @@ class GenProc1{
 	// loads dictionary 
 	public function glossary()
 	{
+		// 3 second check to pull froms paulnoll large library
+		$fp = @fsockopen("www.paulnoll.com", 80, $errno, $errstr,3);
+		if (is_resource($fp))
+		{
+			$file = file_get_contents($this->rand_pages());
+			fclose($fp);
+		}	else
+		{
+			$file = file_get_contents("glossary\short.txt");
+		}			
+		
 		// get contents and source code
-		$file = file_get_contents($this->rand_pages());
 		$htmlfile = htmlentities($file);
 		
 		// build match
