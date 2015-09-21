@@ -1,5 +1,4 @@
 
-
 .title{
 	font-family: 'Special Elite', cursive;
 	font-size:48px;
@@ -25,6 +24,31 @@
 	margin: 0 0 30px;
 	padding:100px 0 80px;
 }
+#words-group{
+	margin-bottom:0; 	
+}
 .form-inline .form-control {
 	width:40px;	
+}
+
+.symbols {
+	width:40px;	
+}
+
+.animate
+{
+	color:#1d4521; 
+	font-size:16px;
+	margin: 0 auto;
+}
+
+.status
+{
+	color:#3a8240; 
+}
+
+.status_info
+{
+	margin: 0 auto;
+	margin-top: 4px; 
 }

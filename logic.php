@@ -4,6 +4,7 @@ class GenProc1{
 	public $words = array();
 	public $track = array(); 
 	public $password; 
+	public $word_status; 
 		
 	public function __construct()
 	{
@@ -31,15 +32,17 @@ class GenProc1{
 	// loads dictionary 
 	public function glossary()
 	{
-		// 3 second check to pull froms paulnoll large library
+		// 3 second check to pull froms paulnoll large library -MIKE DO NOT FORGET TO REMOVE @ from fsock URL
 		$fp = @fsockopen("www.paulnoll.com@", 80, $errno, $errstr,3);
 		if (is_resource($fp))
 		{
 			$file = file_get_contents($this->rand_pages());
 			fclose($fp);
+			$this->word_status = "Generator Status: Online (rendering from 3000 words)";
 		}	else
 		{
 			$file = file_get_contents("glossary\short.txt");
+			$this->word_status = "Generator Status: Offline (rendering from 500 words)"; 
 		}			
 		
 		// get contents and source code
@@ -125,21 +128,30 @@ class GenProc1{
 		}
 	}
 	
-	// format/generate words
+	// format-generate words
 	public function generate($param, $delimiter)
 	{
-		if($this->checkbox('uppercase') == "on")
-		{ 
-			echo strtoupper($param.$delimiter);
-		}
-		else if ($this->checkbox('firstcase') == "on")
-		{ 
-			echo ucfirst($param.$delimiter);
+		// validates symbols 
+		if(preg_match("/[\$_!~,|:;@#\-]/",$delimiter) == 1 || $delimiter == "")
+		{
+			// formats and adds delimiter
+			if($this->checkbox('uppercase') == "on")
+			{ 
+				return strtoupper($param.$delimiter);
+			}
+			else if ($this->checkbox('firstcase') == "on")
+			{ 
+				return  ucfirst($param.$delimiter);
+			}
+			else
+			{ 
+				return  $param.$delimiter;
+			}	
 		}
 		else
-		{ 
-			echo $param.$delimiter;
-		}	
+		{
+				return  $param;
+		}
 	}		
 	
 	// returns words dictionary count
@@ -151,25 +163,28 @@ class GenProc1{
 	// return words
 	public function rendword($param)
 	{
-		$this->word = $param;
-		
-		for($j=0; $j < $this->word; $j++)
-		{
-			$rand = rand(0,$this->wordcount()-1);
+		// validates number 
+		if($param <= 9)
+		{	
+			$this->word = $param;
 			
-			if (in_array($rand, $this->track))
+			for($j=0; $j < $this->word; $j++)
 			{
-				$j--;
+				$rand = rand(0,$this->wordcount()-1);
+				
+				if (in_array($rand, $this->track))
+				{
+					$j--;
+				}
+				else
+				{
+					array_push($this->track,$rand);
+					$j == $this->word-1 ? $delimiter = "" : $delimiter = $this->checkfield('delimiter');
+					 
+					$this->show($this->generate( $this->words[$rand], $delimiter));
+				}				
 			}
-			else
-			{
-				array_push($this->track,$rand);
-				$j == $this->word-1 ? $delimiter = "" : $delimiter = $this->checkfield('delimiter');
-				 
-				echo $this->generate( $this->words[$rand], $delimiter);
-			}				
 		}
-
 	}
 }
 ?>
