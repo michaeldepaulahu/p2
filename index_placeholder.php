@@ -1,9 +1,3 @@
-<?php 
-	
-require('logic.php'); 
-$process = new GenProc1();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,22 +10,58 @@ $process = new GenProc1();
 <!--CSS-->
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/style.css">
+<link href='https://fonts.googleapis.com/css?family=Special+Elite|Shadows+Into+Light+Two' rel='stylesheet' type='text/css'>
 <!--JS-->
 <script src="js/jquery-1.11.3.min.js"></script>
 </head>
 <body>
-    <div class="container-fluid"> 
-    	<p>xkcd Password Generator</p>
-        <form method='POST' action='index_placeholder.php'>
-            <label>Number of Words</label> <input type='text' name='words'><br>
-            <label>Separator</label> <input type='text' name='delimiter'><br>
-            <label>Add a number</label> <input type="checkbox" name="checkbox"><br> 
-            <label>Add a symbol</label> <input  type="checkbox" name='symbols'><br>
-            <label>First letter uppercase</label> <input  type="checkbox" name='firstcase'><br>
-            <label>All uppercase</label> <input  type="checkbox" name='uppercase'><br>
-            <input type='submit' value='generate'>
-        </form>     
-	</div>
+    <div class="container-fluid">     
+        <!--header-->
+        <header>
+            <div class="row thumb1">
+                <div class="col-lg-12 text-center">
+                    <p class="title">xkcd Password Generator</p>
+                        <form method='POST' action='index_placeholder.php' class="form-inline">
+                            <div class="form-group">
+                                <label>Number of Words</label>
+                                <input type="text" class="form-control" placeholder="#" name='words'>
+                            </div>
+                            <div class="form-group">
+                                <label>Separator</label>
+                                <input type="text" class="form-control" placeholder="-" name='delimiter'>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                <input type="checkbox" name="checkbox"> Add a number
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                <input type="checkbox" name="symbols"> Add a symbol
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                <input type="radio" name="firstcase"> First letter uppercase
+                                </label>
+                            </div>  
+                            <div class="checkbox">
+                                <label>
+                                <input type="radio" name="uppercase"> All uppercase
+                                </label>
+                            </div>                       
+                                <button type="submit" class="btn btn-default">Submit</button>
+                        </form>                                        
+                </div>
+            </div>
+       </header>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 main">
+                <div class="generate text-center"><?php require('logic.php');  $process = new GenProc1(); ?></div>
+                <div class="text-center"><img src="img/1.png"></div>
+            </div>
+        </div>       
+       </div>
     <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

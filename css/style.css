@@ -1,0 +1,30 @@
+
+
+.title{
+	font-family: 'Special Elite', cursive;
+	font-size:48px;
+}
+
+.generate{
+	font-family: 'Shadows Into Light Two', cursive;
+	font-size:48px;
+	color:#FFFFFF;
+	margin: 0 auto; 
+}
+
+.thumb1{
+	height:218px;
+	padding-top:40px; 
+	margin: 0 auto;
+}
+
+.main{
+	background:url(../img/main.jpg) top no-repeat;
+	position:relative;
+	overflow:hidden;
+	margin: 0 0 30px;
+	padding:100px 0 80px;
+}
+.form-inline .form-control {
+	width:40px;	
+}
