@@ -9,7 +9,17 @@
 
 		// symbol function
 		$(sel).click(function(){
-			$('#delimiter').val(symbol);
+
+				$('#delimiter').val(symbol);
+		}); 
+	}
+	
+	function symbol1(sel, symbol){
+
+		// symbol function
+		$(sel).click(function(){
+
+				$('#delimiter1').val(symbol);
 		}); 
 	}
 	
@@ -40,6 +50,19 @@
 		validate("#words", "#generate","disabled", "");		
 		
 		// validate symbol input
+		symbol1("#at1", "@");
+		symbol1("#hyphen1", "-");
+		symbol1("#hash1", "#");
+		symbol1("#dollar1", "$");
+		symbol1("#under1", "_");
+		symbol1("#mark1", "!");
+		symbol1("#tilde1", "~");
+		symbol1("#comma1", ",");
+		symbol1("#pipe1", "|");
+		symbol1("#colon1", ":");
+		symbol1("#semi1", ";");
+		
+		// validate symbol input
 		symbol("#at", "@");
 		symbol("#hyphen", "-");
 		symbol("#hash", "#");
@@ -50,7 +73,7 @@
 		symbol("#comma", ",");
 		symbol("#pipe", "|");
 		symbol("#colon", ":");
-		symbol("#semi", ";");
+		symbol("#semi", ";");		
 		
 		// animation 
 		document.getElementById('anim1').innerHTML = "0.1011010010100101"; 

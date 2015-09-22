@@ -108,7 +108,10 @@ class GenProc1{
 	{	
 		for($j=0; $j < sizeof($this->track); $j++)
 		{
-			$j ==  sizeof($this->track)-1 ? $delimiter = "" : $delimiter = $this->checkfield('delimiter');	 
+			$j ==  sizeof($this->track)-1 ? $delimiter = "" : $delimiter = 
+			$this->checkfield('delimiter') == "" ? 
+			$this->checkfield('delimiter1') : 
+			$this->checkfield('delimiter');	 
 			$this->show($this->generate( $this->words[$this->track[$j]], $delimiter));
 		}
 	}

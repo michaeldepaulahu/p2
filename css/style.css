@@ -28,8 +28,13 @@
 	font-size:48px;
 	color:#FFFFFF;
 	margin: 0 auto; 
+    white-space: pre-wrap;        
+    white-space: -moz-pre-wrap;    
+    white-space: -pre-wrap;      
+    white-space: -o-pre-wrap;      
+    word-wrap: break-word;
+	width:80%; 
 }
-
 .thumb1{
 	padding-top:40px; 
 	margin: 0 auto;

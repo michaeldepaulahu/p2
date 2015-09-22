@@ -52,7 +52,7 @@ $process = new GenProc1('words');
                     <div class="collapse navbar-collapse" id="mobile1">
                         <div class="nav navbar-nav">
 							<form method='POST' action='index_placeholder.php' class="form-mobile visible-xs">
-								<?php // require('process.php'); ?>
+								<?php  require('process1.php'); ?>
                         	</form>
                             <div class="status_info">
                                 <img src="img/off.png"> Offline dictionary - 500 words | 
