@@ -55,7 +55,7 @@ $process = new GenProc1('words');
 								<?php  require('process1.php'); ?>
                         	</form>
                             <div class="status_info">
-                                <img src="img/off.png"> Offline dictionary - 500 words | 
+                                <img src="img/off.png"> Offline dictionary - 500 words<br> 
                                 <img src="img/on.png"> Online dictionary - 3000 words
                             </div>                            
                         </div>
@@ -74,9 +74,21 @@ $process = new GenProc1('words');
                 <div class="animate text-center status"><?php echo  $process->word_status; ?></div>
             </div>
         </div>  
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-				adsasdasdas
+        <div class="row thumb2">
+            <div class="col-xs-12 col-sm-12 col-md-12s">
+            <h2>Dehashed Password Generator</h2>
+				This tool allows for auto-generation of highly secure passwords by employing randomization of a mix of letters, numbers and special characters attributes. By using such schema, it increases the password strengths exhausting guesses and attempts against sophisticated and systematic searches, such as brute-force attacks. 
+             <h2>Features</h2>
+             <ul>   
+                <li>Randomization</li>
+                <li>Entropy up to +- 300 bits</li>
+                <li>Numbers and Special Characters inclusion</li>
+                <li>Case selection</li>
+                <li>Up to 9 words selection providing lengths up to +- 70 chars</li>
+                <li>500 random words in offline mode</li>
+                <li>3000 random words in online mode</li>
+                <li>Mobile/Tablet Friendly</li>
+			</ul>		
             </div>
         </div>               
 	</div>

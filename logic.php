@@ -20,10 +20,6 @@ class GenProc1{
 	
 	// session function
 	public function session(){
-		
-		if (!isset($_SESSION)) {
-  			session_start();	
-		}	
 		$session = $_SESSION['nW'];
 		$param = isset($session) ? $session = $this->checkfield('words') : $session = 3; 
 		return $param; 
@@ -194,6 +190,10 @@ class GenProc1{
 	// return words
 	public function rendword($param)
 	{		
+	
+		if (!isset($_SESSION)) {
+  			session_start();	
+		}		
 		// validates number 
 		if($param <= 9)
 		{	

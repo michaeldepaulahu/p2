@@ -40,6 +40,10 @@
 	margin: 0 auto;
 }
 
+.thumb2{
+	margin: 0 30px 30px 30px; 
+}
+
 .main{
 	background:url(../img/main.jpg) top no-repeat;
 	position:relative;
@@ -87,4 +91,7 @@ footer{
 }
 .form-mobile{
 	padding: 0 40px 0 40px;	
+}
+.navbar-header{
+	padding: 0 20px 0 20px; 	
 }
