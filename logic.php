@@ -6,15 +6,33 @@ class GenProc1{
 	public $password; 
 	public $word_status; 
 		
-	public function __construct()
+	public function __construct($n_word)
 	{
-		// build dictionary
+		// build dictionary online or offline
 		$this->glossary(); 
 		
-		// renders words
-		$this->rendword(
-		$this->checkfield('words')
-		); 
+		// randomize the words by building an array of selected numbers
+		$this->rendword($this->checkfield($n_word)); 
+
+		$this->session();
+
+	}
+	
+	// session function
+	public function session(){
+		
+		if (!isset($_SESSION)) {
+  			session_start();	
+		}	
+		$session = $_SESSION['nW'];
+		$param = isset($session) ? $session = $this->checkfield('words') : $session = 3; 
+		return $param; 
+	}
+	
+	public function display()
+	{
+		// renders the words
+		$this->show_numbers();
 		
 		// renders numbers
 		$this->show(
@@ -26,7 +44,7 @@ class GenProc1{
 		$this->show(
 		$this->char(
 		$this->checkbox('symbols')
-		));
+		));	
 	}
 	
 	// loads dictionary 
@@ -84,6 +102,14 @@ class GenProc1{
 		echo $post;  	
 	}
 	
+	function show_numbers()
+	{	
+		for($j=0; $j < sizeof($this->track); $j++)
+		{
+			$j ==  sizeof($this->track)-1 ? $delimiter = "" : $delimiter = $this->checkfield('delimiter');	 
+			$this->show($this->generate( $this->words[$this->track[$j]], $delimiter));
+		}
+	}
 	// check returned post
 	function checkfield($param)
 	{
@@ -163,9 +189,15 @@ class GenProc1{
 	// return words
 	public function rendword($param)
 	{
+		if (!isset($_SESSION)) 
+		{
+  			session_start();
+		}
+		
 		// validates number 
 		if($param <= 9)
 		{	
+
 			$this->word = $param;
 			
 			for($j=0; $j < $this->word; $j++)
@@ -179,9 +211,9 @@ class GenProc1{
 				else
 				{
 					array_push($this->track,$rand);
-					$j == $this->word-1 ? $delimiter = "" : $delimiter = $this->checkfield('delimiter');
+					//$j == $this->word-1 ? $delimiter = "" : $delimiter = $this->checkfield('delimiter');
 					 
-					$this->show($this->generate( $this->words[$rand], $delimiter));
+					//$this->show($this->generate( $this->words[$rand], $delimiter));
 				}				
 			}
 		}

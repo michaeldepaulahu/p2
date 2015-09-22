@@ -1,13 +1,7 @@
 <?php 
 require('logic.php');
+$process = new GenProc1('words');
 
-if (!isset($_SESSION)) {
-  	session_start();
-	if(isset($_POST['words']))
-	$_session['keep_word'] = $_POST['words']; 
-	else
-	$_session['keep_word'] = 3; 
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +30,7 @@ if (!isset($_SESSION)) {
                         <form method='POST' action='index_placeholder.php' class="form-inline">
                             <div class="form-group" id="words-group">
                                 <label>Number of Words (Max. 9)</label>
-                                <input type="text" class="form-control" name='words' id='words' value="<?php echo $_session['keep_word']; ?>" maxlength="1">
+                                <input type="text" class="form-control" name='words' id='words' value="<?php echo $_SESSION['nW']; ?>" maxlength="1">
                             </div>
                             <div class="checkbox">
                                 <label>
@@ -86,7 +80,7 @@ if (!isset($_SESSION)) {
 		</header>
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 main">
-                <div class="generate text-center"><?php $process = new GenProc1(); ?></div>
+                <div class="generate text-center"><?php $process->display(); ?></div>
                 <div class="text-center" id="anim"><img src="img/<?php echo rand(1,13);?>.png"></div>
                 <div id="anim1" class="animate text-center"></div>
                 <div class="animate text-center status"><?php echo  $process->word_status; ?></div>
