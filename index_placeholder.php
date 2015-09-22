@@ -25,57 +25,45 @@ $process = new GenProc1('words');
         <!--header-->
         <header>
             <div class="row thumb1 text-center">
-                <div class="col-lg-12">
+                <div class="col-lg-12 hidden-xs">
                     <p class="title">xkcd Password Generator</p>
-                        <form method='POST' action='index_placeholder.php' class="form-inline">
-                            <div class="form-group" id="words-group">
-                                <label>Number of Words (Max. 9)</label>
-                                <input type="text" class="form-control" name='words' id='words' value="<?php echo $_SESSION['nW']; ?>" maxlength="1">
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                <input type="checkbox" name="checkbox"> Add a number
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                <input type="checkbox" name="symbols"> Add a symbol
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                <input type="checkbox" name="firstcase"> First letter uppercase
-                                </label>
-                            </div>  
-                            <div class="checkbox">
-                                <label>
-                                <input type="checkbox" name="uppercase"> All uppercase
-                                </label>
-                            </div><br>             
-                            <div class="form-group">
-                                <label>Separator</label>
-                                <!--<input type="text" class="form-control" placeholder="-" name='delimiter'>-->
-                                <input type="hidden" class="form-control" name='delimiter' id='delimiter' value="">
-                                <button class="btn btn-default symbols" type="button" id="at">@</button>
-                                <button class="btn btn-default symbols" type="button" id="hyphen">-</button>
-                                <button class="btn btn-default symbols" type="button" id="hash">#</button>
-                                <button class="btn btn-default symbols" type="button" id="dollar">$</button>
-                                <button class="btn btn-default symbols" type="button" id="under">_</button>
-                                <button class="btn btn-default symbols" type="button" id="mark">!</button>
-                                <button class="btn btn-default symbols" type="button" id="tilde">~</button> 
-                                <button class="btn btn-default symbols" type="button" id="comma">,</button>  
-                                <button class="btn btn-default symbols" type="button" id="pipe">|</button>  
-                                <button class="btn btn-default symbols" type="button" id="colon">:</button>  
-                                <button class="btn btn-default" type="button" id="semi">;</button>                                    
-                            </div>
-                                      
-                                <button type="submit" class="btn btn-default" id="generate">Generate</button>
-                        </form>  
+						<form method='POST' action='index_placeholder.php' class="form-inline hidden-xs">
+							<?php require('process.php'); ?>
+                        </form>
                         <div class="status_info">
                 			<img src="img/off.png"> Offline dictionary - 500 words | 
                             <img src="img/on.png"> Online dictionary - 3000 words
                         </div>
 		          </div>
+            <!--Mobile Navigation-->
+            <nav class="navbar navbar-default visible-xs">
+                <div class="container-fluid">
+                    <!-- Control -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mobile1" aria-expanded="false">
+                            <span class="sr-only">Navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">xkcd Password Generator</a>
+                    </div>
+                    <!-- Menu -->
+                    <div class="collapse navbar-collapse" id="mobile1">
+                        <div class="nav navbar-nav">
+							<form method='POST' action='index_placeholder.php' class="form-mobile visible-xs">
+								<?php require('process.php'); ?>
+                        	</form>
+                            <div class="status_info">
+                                <img src="img/off.png"> Offline dictionary - 500 words | 
+                                <img src="img/on.png"> Online dictionary - 3000 words
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!--End Mobile Navigation-->  
+                  
             </div>
 		</header>
         <div class="row">
@@ -85,8 +73,31 @@ $process = new GenProc1('words');
                 <div id="anim1" class="animate text-center"></div>
                 <div class="animate text-center status"><?php echo  $process->word_status; ?></div>
             </div>
-        </div>       
+        </div>  
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+				adsasdasdas
+            </div>
+        </div>               
 	</div>
+ <!--footer-->
+    <footer>
+        <div class="container footer">
+            <div class="row">
+                <div class="col-md-8">
+                    <p><strong>&copy; 2015 Dehashed.com</strong></p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>XKCD Webcomics</strong></p>
+                    <ul>
+                        <li><a href="http://xkcd.com/936/">Inspired by XKCD Password Strength Webcomic</a></li>
+                        <li><a href="https://en.wikipedia.org/wiki/Xkcd">More about XKCD</a></li>
+                    </ul>
+                </div>
+                </div>
+            </div>   
+    </footer>
+   	<!--end footer-->     
     <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
