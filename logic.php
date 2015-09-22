@@ -51,7 +51,8 @@ class GenProc1{
 	public function glossary()
 	{
 		// 3 second check to pull froms paulnoll large library -MIKE DO NOT FORGET TO REMOVE @ from fsock URL
-		$fp = @fsockopen("www.paulnoll.com@", 80, $errno, $errstr,3);
+		//$fp = @fsockopen("www.paulnoll.com", 80, $errno, $errstr,3);
+		$fp = fsockopen("192.168.225.1", 80, $errno, $errstr,3);
 		if (is_resource($fp))
 		{
 			$file = file_get_contents($this->rand_pages());
@@ -59,7 +60,8 @@ class GenProc1{
 			$this->word_status = "Generator Status: Online (rendering from 3000 words)";
 		}	else
 		{
-			$file = file_get_contents("glossary\short.txt");
+			$file = file_get_contents("http://$_SERVER[HTTP_HOST]" .dirname($_SERVER["PHP_SELF"]) . "/glossary/short.txt");
+
 			$this->word_status = "Generator Status: Offline (rendering from 500 words)"; 
 		}			
 		
@@ -188,12 +190,7 @@ class GenProc1{
 	
 	// return words
 	public function rendword($param)
-	{
-		if (!isset($_SESSION)) 
-		{
-  			session_start();
-		}
-		
+	{		
 		// validates number 
 		if($param <= 9)
 		{	
@@ -211,9 +208,6 @@ class GenProc1{
 				else
 				{
 					array_push($this->track,$rand);
-					//$j == $this->word-1 ? $delimiter = "" : $delimiter = $this->checkfield('delimiter');
-					 
-					//$this->show($this->generate( $this->words[$rand], $delimiter));
 				}				
 			}
 		}
