@@ -14,7 +14,7 @@ class GenProc1{
 		// randomize the words by building an array of selected numbers
 		$this->rendword($this->checkfield($n_word)); 
 
-		$this->session();
+		//$this->session();
 
 	}
 	

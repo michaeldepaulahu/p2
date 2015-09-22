@@ -1,6 +1,6 @@
     <div class="form-group" id="words-group">
         <label>Number of Words (Max. 9)</label>
-        <input type="text" class="form-control" name='words' id='words' value="<?php echo $_SESSION['nW']; ?>" maxlength="1">
+        <input type="text" class="form-control" name='words' id='words' value="<?php // echo $_SESSION['nW']; ?>" maxlength="1">
     </div>
     <div class="checkbox">
         <label>
