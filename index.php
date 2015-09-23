@@ -90,7 +90,14 @@
                 <li>500 random words in offline mode</li>
                 <li>3000 random words in online mode</li>
                 <li>Mobile/Tablet Friendly</li>
-			</ul>		
+			</ul>
+			<h2>Generating Passwords</h2>
+			<p>The generator allows for entering any number from 1 to 9 at a time. Next the generator gives the option to include a number, a symbol and to format each word to a special case, First letter uppercase or all letters uppercase. 
+Please keep in mind that the password strength level of the user-defined password increases according to the number of definitions added to the password string.</p>
+			<p>For instance, to create a password with entropy as high as 300 bits, select 9 words, and enter as many options as possible to the definition.  A much weaker password will increase the chance for a malicious attack (i.e. selecting “2 words” and  including just "a number" to the definition).</p>
+			<p>Another interesting feature with the password generator is that it runs as offline and online mode. Offline dictionary offers up to 500 words versus the online mode which offers up to 3000 words to select from. 
+The online mode selects the words from an external server, which may be up running constantly, but occasionally the server may go down for maintenance or any other reason, in this case, the offline mode will simply take over. This assures dictionary availability at all times.</p>
+            		
             </div>
         </div>               
 	</div>
