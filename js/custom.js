@@ -6,7 +6,7 @@
 	// special characters array 	
 	var symbols = ["@", "-", "#", "$", "_", "!", "~", ",", "|", ":", ";"];
  
- 	//	return symbol for larger devices
+ 	//	assigns special delimiters on click
  	function symbol(sel, slave, symbol){
 
 		// symbol function
@@ -15,6 +15,7 @@
 		}); 
 	}
 	
+	// loops through all special delimiters (large/small devices)
 	function run_symbols()
 	{
 		for (i = 0; i < symbols.length; i++) { 
@@ -52,7 +53,7 @@
 		validate("#words1", "#generate1","disabled", "");		
 		
 
-		// validate symbol input
+		// execute special delimiters
 		run_symbols();
 
 		// animation 
