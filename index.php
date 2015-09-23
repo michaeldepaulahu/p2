@@ -78,8 +78,8 @@
         </div>  
         <div class="row thumb2">
             <div class="col-xs-12 col-sm-12 col-md-12s">
-            <h2>Dehashed Password Generator</h2>
-				This tool allows for auto-generation of highly secure passwords by employing randomization of a mix of letters, numbers and special characters attributes. By using such schema, it increases the password strengths exhausting guesses and attempts against sophisticated and systematic searches, such as brute-force attacks. 
+            <h2>XKCD Password Generator</h2>
+				This password generator, inspired by the <a href="http://xkcd.com/936/">XKCD webcomic</a>, allows for auto-generation of highly secure passwords by employing randomization of a mix of letters, numbers and special characters attributes. By using such schema, it increases the password strengths exhausting guesses and attempts against sophisticated and systematic searches, such as brute-force attacks. 
              <h2>Features</h2>
              <ul>   
                 <li>Randomization</li>
