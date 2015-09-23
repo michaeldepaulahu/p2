@@ -22,7 +22,7 @@
         <input type="checkbox" name="uppercase"> All uppercase
         </label>
     </div><br>             
-    <div class="form-group">
+    <div class="form-group" id="special1">
         <label>Separator</label>
         <input type="hidden" class="form-control" name='delimiter1' id='delimiter1' value="">
         <button class="btn btn-default symbols" type="button" id="at1">@</button>

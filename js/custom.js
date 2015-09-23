@@ -3,23 +3,24 @@
  * Michael Depaula
  * Custom js
  */
+	// special characters array 	
+	var symbols = ["@", "-", "#", "$", "_", "!", "~", ",", "|", ":", ";"];
  
  	//	return symbol for larger devices
- 	function symbol(sel, symbol){
+ 	function symbol(sel, slave, symbol){
 
 		// symbol function
 		$(sel).click(function(){
-			$('#delimiter').val(symbol);
+			$(slave).val(symbol);
 		}); 
 	}
 	
-	//	return symbol for smaller devices (avoid conflict)
-	function symbol1(sel, symbol){
-
-		// symbol function
-		$(sel).click(function(){
-			$('#delimiter1').val(symbol);
-		}); 
+	function run_symbols()
+	{
+		for (i = 0; i < symbols.length; i++) { 
+    		symbol('#'+$("#special button:eq("+[i]+")").attr('id'), '#delimiter',symbols[[i]]);
+			symbol('#'+$("#special1 button:eq("+[i]+")").attr('id'), '#delimiter1',symbols[[i]]);
+		}	
 	}
 	
 	// validate number input fields (second check at client level)
@@ -50,35 +51,13 @@
 		validate("#words1", "#words-group1","has-error", "has-success");
 		validate("#words1", "#generate1","disabled", "");		
 		
-		// validate symbol input (large device)
-		symbol1("#at1", "@");
-		symbol1("#hyphen1", "-");
-		symbol1("#hash1", "#");
-		symbol1("#dollar1", "$");
-		symbol1("#under1", "_");
-		symbol1("#mark1", "!");
-		symbol1("#tilde1", "~");
-		symbol1("#comma1", ",");
-		symbol1("#pipe1", "|");
-		symbol1("#colon1", ":");
-		symbol1("#semi1", ";");
-		
-		// validate symbol input (smaller device, avoid conflict)
-		symbol("#at", "@");
-		symbol("#hyphen", "-");
-		symbol("#hash", "#");
-		symbol("#dollar", "$");
-		symbol("#under", "_");
-		symbol("#mark", "!");
-		symbol("#tilde", "~");
-		symbol("#comma", ",");
-		symbol("#pipe", "|");
-		symbol("#colon", ":");
-		symbol("#semi", ";");		
-		
+
+		// validate symbol input
+		run_symbols();
+
 		// animation 
 		document.getElementById('anim1').innerHTML = "0.1011010010100101"; 
-
+		
 		setInterval(function(){ 
 			var x = Math.random();
 			document.getElementById('anim1').innerHTML = x; 
