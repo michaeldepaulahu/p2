@@ -44,7 +44,11 @@
 		
 		// validate word input
 		validate("#words", "#words-group","has-error", "has-success");
-		validate("#words", "#generate","disabled", "");		
+		validate("#words", "#generate","disabled", "");
+		
+		// validate word input mobile
+		validate("#words1", "#words-group1","has-error", "has-success");
+		validate("#words1", "#generate1","disabled", "");		
 		
 		// validate symbol input (large device)
 		symbol1("#at1", "@");

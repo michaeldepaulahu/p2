@@ -34,8 +34,8 @@
 							<?php require('process.php'); ?>
                         </form>
                         <div class="status_info">
-                			<img src="img/off.png"> Offline dictionary - 500 words | 
-                            <img src="img/on.png"> Online dictionary - 3000 words
+                			<img src="img/off.png" alt="Offline"> Offline dictionary - 500 words | 
+                            <img src="img/on.png" alt="Online"> Online dictionary - 3000 words
                         </div>
 		          </div>
             <!--Mobile Navigation-->
@@ -58,8 +58,8 @@
 								<?php  require('process1.php'); ?>
                         	</form>
                             <div class="status_info">
-                                <img src="img/off.png"> Offline dictionary - 500 words<br> 
-                                <img src="img/on.png"> Online dictionary - 3000 words
+                                <img src="img/off.png" alt="Offline"> Offline dictionary - 500 words<br> 
+                                <img src="img/on.png" alt="Online"> Online dictionary - 3000 words
                             </div>                            
                         </div>
                     </div>
@@ -71,7 +71,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 main">
                 <div class="generate text-center"><?php $process->display(); ?></div>
-                <div class="text-center" id="anim"><img src="img/<?php echo rand(1,13);?>.png"></div>
+                <div class="text-center" id="anim"><img src="img/<?php echo rand(1,13);?>.png" alt="xkcd"></div>
                 <div id="anim1" class="animate text-center"></div>
                 <div class="animate text-center status"><?php echo  $process->word_status; ?></div>
             </div>
