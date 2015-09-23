@@ -53,7 +53,7 @@ class GenProc1
 	public function glossary()
 	{
 		// checks if external server is live running
-		$fp = @fsockopen("192.168.189.1", 80, $errno, $errstr,3);
+		$fp = @fsockopen("www.paulnoll.com", 80, $errno, $errstr,3);
 		if (is_resource($fp))
 		{
 			// retrieve random page from live server, generates online message
