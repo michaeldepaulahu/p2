@@ -3,26 +3,16 @@
  * author: michael depaula
  * custom css style css
 */
-@media (max-width: 767px) {
-
-}
-@media (min-width: 768px) {
-
-}
 @media (min-width: 992px) {
 
 .thumb1{
 	height:218px;
 }
 }
-@media (min-width: 1200px) {
-
-}
 .title{
 	font-family: 'Special Elite', cursive;
 	font-size:48px;
 }
-
 .generate{
 	font-family: 'Shadows Into Light Two', cursive;
 	font-size:48px;
@@ -39,11 +29,9 @@
 	padding-top:40px; 
 	margin: 0 auto;
 }
-
 .thumb2{
 	margin: 0 30px 30px 30px; 
 }
-
 .main{
 	background:url(../img/main.jpg) top no-repeat;
 	position:relative;
@@ -54,28 +42,21 @@
 #words-group{
 	margin-bottom:0; 	
 }
-.form-inline .form-control {
+.form-inline .form-control{
 	width:40px;	
 }
-
-.symbols {
+.symbols{
 	width:40px;	
 }
-
-.animate
-{
-	color:#1d4521; 
+.animate{
+	color:#5C941B; 
 	font-size:16px;
 	margin: 0 auto;
 }
-
-.status
-{
+.status{
 	color:#3a8240; 
 }
-
-.status_info
-{
+.status_info{
 	margin: 0 auto;
 	margin-top: 4px; 
 }
@@ -87,7 +68,6 @@ footer{
 	color:#0B2329;
 	background-image:url(../img/footer_bg.png);
 	background-repeat:repeat-x;
-	
 }
 .form-mobile{
 	padding: 0 40px 0 40px;	

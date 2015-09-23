@@ -4,26 +4,25 @@
  * Custom js
  */
  
- //	return symbol
+ 	//	return symbol for larger devices
  	function symbol(sel, symbol){
 
 		// symbol function
 		$(sel).click(function(){
-
-				$('#delimiter').val(symbol);
+			$('#delimiter').val(symbol);
 		}); 
 	}
 	
+	//	return symbol for smaller devices (avoid conflict)
 	function symbol1(sel, symbol){
 
 		// symbol function
 		$(sel).click(function(){
-
-				$('#delimiter1').val(symbol);
+			$('#delimiter1').val(symbol);
 		}); 
 	}
 	
-	// validate word fields
+	// validate number input fields (second check at client level)
 	function validate(sel, slave, param, param1)
 	{
 		$(sel).keyup(function(){
@@ -37,8 +36,6 @@
 			}
 		})				
 	}
-	
-	//
 
  // load custom
 	$(document).ready(function(){
@@ -49,7 +46,7 @@
 		validate("#words", "#words-group","has-error", "has-success");
 		validate("#words", "#generate","disabled", "");		
 		
-		// validate symbol input
+		// validate symbol input (large device)
 		symbol1("#at1", "@");
 		symbol1("#hyphen1", "-");
 		symbol1("#hash1", "#");
@@ -62,7 +59,7 @@
 		symbol1("#colon1", ":");
 		symbol1("#semi1", ";");
 		
-		// validate symbol input
+		// validate symbol input (smaller device, avoid conflict)
 		symbol("#at", "@");
 		symbol("#hyphen", "-");
 		symbol("#hash", "#");
@@ -78,9 +75,8 @@
 		// animation 
 		document.getElementById('anim1').innerHTML = "0.1011010010100101"; 
 
-		//setInterval(function(){ 
+		setInterval(function(){ 
 			var x = Math.random();
 			document.getElementById('anim1').innerHTML = x; 
-		//}, 500);
-				 	
+		}, 500);		 	
 	});

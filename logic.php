@@ -1,6 +1,13 @@
 <?php
-	
-class GenProc1{
+/**
+*
+* Author: Michael Depaula
+* Description: This file contains the program logic for
+* the password generator web application. 
+* 
+*/
+class GenProc1
+{
 	public $words = array();
 	public $track = array(); 
 	public $password; 
@@ -8,23 +15,21 @@ class GenProc1{
 		
 	public function __construct($n_word)
 	{
-		// build dictionary online or offline
+		// retieves words and builds dicionary
 		$this->glossary(); 
 		
 		// randomize the words by building an array of selected numbers
 		$this->rendword($this->checkfield($n_word)); 
 
-		//$this->session();
-
+		// initialize a sesstion to hold off n value
+		if (!isset($_SESSION)) 
+		{
+  			session_start();	
+		}
 	}
 	
-	// session function
-	public function session(){
-		$session = $_SESSION['nW'];
-		$param = isset($session) ? $session = $this->checkfield('words') : $session = 3; 
-		return $param; 
-	}
-	
+	//	DISPLAY FUNCTION
+	//	Generates the final formatted password	
 	public function display()
 	{
 		// renders the words
@@ -42,33 +47,35 @@ class GenProc1{
 		$this->checkbox('symbols')
 		));	
 	}
-	
-	// loads dictionary 
+		
+	//	GLOSSARY FUNCTION
+	//	Retrieves words from external server, or local to build dictonary
 	public function glossary()
 	{
-		// 3 second check to pull froms paulnoll large library -MIKE DO NOT FORGET TO REMOVE @ from fsock URL
-		//$fp = @fsockopen("www.paulnoll.com", 80, $errno, $errstr,3);
-		$fp = fsockopen("192.168.225.1", 80, $errno, $errstr,3);
+		// checks if external server is live running
+		$fp = @fsockopen("192.168.189.1", 80, $errno, $errstr,3);
 		if (is_resource($fp))
 		{
+			// retrieve random page from live server, generates online message
 			$file = file_get_contents($this->rand_pages());
 			fclose($fp);
 			$this->word_status = "Generator Status: Online (rendering from 3000 words)";
-		}	else
+		}	
+		else
 		{
+			// server offline, retrieves locally, generates offline message
 			$file = file_get_contents("http://$_SERVER[HTTP_HOST]" .dirname($_SERVER["PHP_SELF"]) . "/glossary/short.txt");
-
 			$this->word_status = "Generator Status: Offline (rendering from 500 words)"; 
 		}			
 		
-		// get contents and source code
+		// converts page to source code
 		$htmlfile = htmlentities($file);
 		
-		// build match
+		// retrieve <li> patterns
 		$pattern = htmlspecialchars("<li>[A-Za-z\s]*<\/li>", ENT_QUOTES);
 		preg_match_all("/$pattern/", $htmlfile, $read);
 		
-		// remove tags
+		// remove <li> patterns, builds glossary
 		$pattern_r = htmlspecialchars("<li>\s+|\s+<\/li>", ENT_QUOTES);
 		foreach ($read[0] as $value)
 		{
@@ -76,75 +83,42 @@ class GenProc1{
 		}			
 	}
 
-	// random-select page
-	function rand_pages()
-	{
-		$rando = rand(1,30);
-		$url = "http://www.paulnoll.com/Books/Clear-English/words-%02d-%02d-hundred.html";
-		
-		if($rando % 2 == 0)
-		{
-			$rand_pages = sprintf($url, $rando-1, $rando);	
-			return $rand_pages;
-		} 
-		else 
-		{
-			$rand_pages = sprintf($url, $rando, $rando+1);	
-			return $rand_pages;
-		}
-	}
+	//	WORD GENERATE FUNCTION
+	//	select each word and adds to a track list
+	public function rendword($param)
+	{			
+		// validates number 
+		if ($param <= 9)
+		{	
+
+			$this->word = $param;
 			
-	// print post values
-	function show($post)
-	{
-		echo $post;  	
-	}
-	
-	function show_numbers()
-	{	
-		for($j=0; $j < sizeof($this->track); $j++)
-		{
-			$j ==  sizeof($this->track)-1 ? $delimiter = "" : $delimiter = 
-			$this->checkfield('delimiter') == "" ? 
-			$this->checkfield('delimiter1') : 
-			$this->checkfield('delimiter');	 
-			$this->show($this->generate( $this->words[$this->track[$j]], $delimiter));
-		}
-	}
-	// check returned post
-	function checkfield($param)
-	{
-		if (isset($_POST[$param]))
-		{
-			return $_POST[$param];
+			for ($j=0; $j < $this->word; $j++)
+			{
+				$rand = rand(0,$this->wordcount()-1);
+				
+				if (in_array($rand, $this->track))
+				{
+					$j--;
+				}
+				else
+				{
+					array_push($this->track,$rand);
+				}				
+			}
 		}
 	}
 
-	// check on/off returned checkbox value
-	function checkbox($param)
-	{
-		foreach ($_POST as $value)
-		{
-			if (isset($_POST[$param]))
-			{
-				return $_POST[$param];
-			}
-			else
-			{
-				$_POST[$param] = "off"; 
-				return $_POST[$param];
-			}
-		}
-	}
-	
-	// return number	
+	//	NUMBER GENERATE FUNCTION
+	//	randomly selects numbers from 0-9	
 	public function numbers($param)
 	{
 		$numbers = $param == "on" ? rand(0,9) : ""; 	
 		return $numbers; 
 	}
 
-	//return character
+	//	SYMBOLS GENERATE FUNCTION
+	//	randomly selects special characters 	
 	public function char($param)
 	{	
 		if ($param == "on")
@@ -153,16 +127,17 @@ class GenProc1{
 			$chr = preg_match("/^[\'\"@a-zA-Z0-9]*$/",$char) ? $this->char($param) : $char;
 			return $chr;
 		}
-	}
+	}	
 	
-	// format-generate words
+	//	FORMATTING FUNCTION
+	//	formats the word for special cases and delimiters
 	public function generate($param, $delimiter)
 	{
 		// validates symbols 
-		if(preg_match("/[\$_!~,|:;@#\-]/",$delimiter) == 1 || $delimiter == "")
+		if (preg_match("/[\$_!~,|:;@#\-]/",$delimiter) == 1 || $delimiter == "")
 		{
 			// formats and adds delimiter
-			if($this->checkbox('uppercase') == "on")
+			if ($this->checkbox('uppercase') == "on")
 			{ 
 				return strtoupper($param.$delimiter);
 			}
@@ -181,39 +156,86 @@ class GenProc1{
 		}
 	}		
 	
-	// returns words dictionary count
+	//	RANDOM SELECT FUNCTION
+	//	ramdonly selects pages from live server
+	function rand_pages()
+	{
+		$rando = rand(1,30);
+		$url = "http://www.paulnoll.com/Books/Clear-English/words-%02d-%02d-hundred.html";
+		
+		if ($rando % 2 == 0)
+		{
+			$rand_pages = sprintf($url, $rando-1, $rando);	
+			return $rand_pages;
+		} 
+		else 
+		{
+			$rand_pages = sprintf($url, $rando, $rando+1);	
+			return $rand_pages;
+		}
+	}
+	
+	//	DELIMITER FUNCTION
+	//	adds the delimiter (separator)	
+	function show_numbers()
+	{	
+		for ($j=0; $j < sizeof($this->track); $j++)
+		{
+			$j ==  sizeof($this->track)-1 ? $delimiter = "" : $delimiter = 
+			$this->checkfield('delimiter') == "" ? 
+			$this->checkfield('delimiter1') : 
+			$this->checkfield('delimiter');	 
+			$this->show($this->generate( $this->words[$this->track[$j]], $delimiter));
+		}
+	}
+	
+	//	CHECK POST FUNCTION
+	//	error-check post values
+	function checkfield($param)
+	{
+		if (isset($_POST[$param]))
+		{
+			return $_POST[$param];
+		}
+	}
+
+	//	CHECKBOX POST FUNCTION
+	//	error-check checkbox value, creates on and off values
+	function checkbox($param)
+	{
+		foreach ($_POST as $value)
+		{
+			if (isset($_POST[$param]))
+			{
+				return $_POST[$param];
+			}
+			else
+			{
+				$_POST[$param] = "off"; 
+				return $_POST[$param];
+			}
+		}
+	}
+	
+	//	SESSION N FUNCTION
+	//	Holds number of words input value
+	public function session($sessionId, $n_word)
+	{
+		 $_SESSION[$sessionId] = $this->checkfield($n_word);	
+	}
+		
+	//	SHOW FUNCTION
+	//	echos password attributes	
+	function show($post)
+	{
+		echo $post;  	
+	}
+	
+	//	COUNT FUNCTION
+	//	returns dictionary count
 	public function wordcount()
 	{
 		return count($this->words); 
-	}
-	
-	// return words
-	public function rendword($param)
-	{		
-	
-		if (!isset($_SESSION)) {
-  			session_start();	
-		}		
-		// validates number 
-		if($param <= 9)
-		{	
-
-			$this->word = $param;
-			
-			for($j=0; $j < $this->word; $j++)
-			{
-				$rand = rand(0,$this->wordcount()-1);
-				
-				if (in_array($rand, $this->track))
-				{
-					$j--;
-				}
-				else
-				{
-					array_push($this->track,$rand);
-				}				
-			}
-		}
 	}
 }
 ?>

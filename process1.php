@@ -24,7 +24,6 @@
     </div><br>             
     <div class="form-group">
         <label>Separator</label>
-        <!--<input type="text" class="form-control" placeholder="-" name='delimiter'>-->
         <input type="hidden" class="form-control" name='delimiter1' id='delimiter1' value="">
         <button class="btn btn-default symbols" type="button" id="at1">@</button>
         <button class="btn btn-default symbols" type="button" id="hyphen1">-</button>
